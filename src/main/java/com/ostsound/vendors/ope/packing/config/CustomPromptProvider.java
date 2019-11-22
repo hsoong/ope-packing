@@ -17,7 +17,7 @@ public class CustomPromptProvider implements PromptProvider {
 
     @Override
     public AttributedString getPrompt() {
-        String prompt = "unknown-path";
+        String prompt = "unknown";
 
         String workDir = Utils.workDir();
         if (!StringUtils.isEmpty(workDir)) {
@@ -25,7 +25,11 @@ public class CustomPromptProvider implements PromptProvider {
                     .filter(s -> !s.isEmpty())
                     .collect(Collectors.toList());
             if (!coms.isEmpty()) {
-                prompt = coms.get(coms.size() - 1);
+                if (coms.size() >= 2) {
+                    prompt = coms.get(coms.size() - 2).concat(File.separator).concat(coms.get(coms.size() - 1));
+                } else {
+                    prompt = coms.get(coms.size() - 1);
+                }
             }
         }
         prompt = "--- " + prompt + " »";
