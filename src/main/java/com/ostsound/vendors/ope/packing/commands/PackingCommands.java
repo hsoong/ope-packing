@@ -106,7 +106,7 @@ public final class PackingCommands {
                         } else {
                             command = process(Mode.valueOf(mode), filepath);
                         }
-                    } else if ("R".equals(mode) && flags.length == 3) {
+                    } else if (mode.startsWith("R") && flags.length == 3) {
                         command = process(flags[1], flags[2]);
                     } else {
                         valid = false;
